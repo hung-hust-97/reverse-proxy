@@ -1,7 +1,7 @@
 FROM nginx:1.20.2
 COPY nginx.conf /etc/nginx/nginx.conf.org
 COPY health-check.conf /etc/nginx/
-ENV EXPOSED_PORT 443
+ENV EXPOSED_PORT 80
 ENV SERVER_NAME_DASHBOARD dashboard.opex.dev
 ENV SERVER_NAME_ADMIN_PANEL admin.opex.dev
 ENV SERVER_NAME_WEB_APP app.opex.dev
@@ -17,4 +17,4 @@ ENTRYPOINT sh -c 'envsubst \
 < /etc/nginx/nginx.conf.org \
 | tee /etc/nginx/nginx.conf \
 && nginx -g "daemon off;"'
-EXPOSE 443
+EXPOSE 80

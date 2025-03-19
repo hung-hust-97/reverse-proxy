@@ -1,8 +1,11 @@
 version: '3.8'
 services:
   nginx:
-    image: ghcr.io/opexdev/nginx
+    image: opex-nginx:debug
     build: .
+    ports:
+      - "80:80"
+      - "443:443"
     environment:
       - EXPOSED_PORT=$EXPOSED_PORT
       - SERVER_NAME_DASHBOARD=$SERVER_NAME_DASHBOARD
@@ -18,6 +21,8 @@ services:
     secrets:
       - opex_dev_crt
       - private_pem
+    networks:
+      - core_default
   nginx-exporter:
     image: nginx/nginx-prometheus-exporter:1.1.0
     ports:
@@ -28,3 +33,6 @@ secrets:
     file: opex.dev.crt
   private_pem:
     file: private.pem
+networks:
+  core_default:
+    external: true
