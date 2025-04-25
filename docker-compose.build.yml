@@ -1,5 +1,5 @@
 version: '3.8'
 services:
   nginx:
-    image: ghcr.io/opexdev/nginx:$TAG
+    image: opex-nginx:debug
     build: .
